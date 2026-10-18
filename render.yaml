@@ -20,7 +20,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false                       # secret: you type it in the Render dashboard
       - key: FRONTEND_ORIGINS
-        value: http://localhost:5173      # updated with the Vercel URL after the first deploy
+        value: https://resume-rag-chatbot-umber.vercel.app,http://localhost:5173
       - key: CHAT_MODEL
         value: gemini-3.5-flash-lite
       - key: EMBEDDING_MODEL
