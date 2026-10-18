@@ -1,0 +1,33 @@
+# Render Blueprint: describes the backend service as code.
+# In Render: New → Blueprint → choose this repo → enter GEMINI_API_KEY → Apply.
+
+services:
+  - type: web
+    name: resume-chatbot-api
+    runtime: docker
+    plan: free
+    region: singapore                     # closest free region to India
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    # CD: deploy automatically, but ONLY after the GitHub Actions checks pass.
+    autoDeployTrigger: checksPass
+    # Only redeploy when backend files change (not on frontend/README edits).
+    buildFilter:
+      paths:
+        - backend/**
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false                       # secret: you type it in the Render dashboard
+      - key: FRONTEND_ORIGINS
+        value: http://localhost:5173      # updated with the Vercel URL after the first deploy
+      - key: CHAT_MODEL
+        value: gemini-3.8-flash
+      - key: EMBEDDING_MODEL
+        value: gemini-embedding-001
+      - key: EMBEDDING_DIM
+        value: "768"
+      - key: TOP_K
+        value: "4"
+      - key: MAX_UPLOAD_MB
+        value: "10"
