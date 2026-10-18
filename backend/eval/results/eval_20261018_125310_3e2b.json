@@ -1,0 +1,21 @@
+{
+  "id": "eval_20261018_125310_3e2b",
+  "status": "running",
+  "created_at": "2026-10-18T12:53:10.793417+00:00",
+  "score_range": [
+    0,
+    1
+  ],
+  "scores": {},
+  "cases": [],
+  "dataset": "resume-qa-v1",
+  "case_count": 18,
+  "settings": {
+    "chat_model": "gemini-3.5-flash-lite",
+    "embedding_model": "gemini-embedding-001",
+    "judge_model": "gemini-3.1-flash-lite",
+    "top_k": 4,
+    "chunk_size": 500,
+    "chunk_overlap": 100
+  }
+}

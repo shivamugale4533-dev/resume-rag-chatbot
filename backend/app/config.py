@@ -28,7 +28,7 @@ TOP_K = int(os.getenv("TOP_K", "4"))
 
 # ---------------- Class 6: LLM (answer generation) ----------------
 # Which Gemini model writes the answers. "Flash" models are fast and on the free tier.
-CHAT_MODEL = os.getenv("CHAT_MODEL", "gemini-3.8-flash")
+CHAT_MODEL = os.getenv("CHAT_MODEL", "gemini-3.5-flash-lite")
 
 # How many previous chat messages we send to the AI (keeps prompts short).
 MAX_HISTORY_MESSAGES = int(os.getenv("MAX_HISTORY_MESSAGES", "6"))
