@@ -1,0 +1,226 @@
+{
+  "id": "eval_20261018_132502_c4fe",
+  "status": "failed",
+  "created_at": "2026-10-18T13:25:02.952852+00:00",
+  "score_range": [
+    0,
+    1
+  ],
+  "scores": {
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.9575,
+    "context_precision": 0.8438,
+    "context_recall": 1.0,
+    "answer_correctness": 0.9458
+  },
+  "cases": [
+    {
+      "id": "q01",
+      "type": "factual",
+      "question": "What is the candidate's current job title and company?",
+      "ground_truth": "The candidate has worked as an AI/ML Engineer at VectoreX Software Pvt Ltd since May 2024.",
+      "reference_contexts": [
+        "Work Experience: VectoreX Software Pvt Ltd\nAI/ML Engineer May 2024 - Present"
+      ],
+      "answer": "The candidate's current job title is AI/ML Engineer, and they work at VectoreX Software Pvt Ltd [2].",
+      "contexts": [
+        "Resume overview: The resume has these sections: Skills, Work Experience, Projects, Education. It lists 3 projects: Agentic Healthcare Assistant (Multi-Agent RAG System); RAG-Based Intelligent Document Q&A Chatbot; Resume Screening Assistant | AI/ML, NLP, Semantic Search.",
+        "Work Experience: VectoreX Software Pvt Ltd\nAI/ML Engineer May 2024 - Present\n\u2022 Engineered a production-grade RAG platform on GCP for natural-language retrieval across enterprise knowledge\nsources, improving end-to-end answer accuracy by ~30%.\n\u2022 Designed a hybrid retrieval and reranking pipeline combining dense embeddings, BM25, metadata filtering,\nReciprocal Rank Fusion (RRF), and cross-encoder reranking, improving Recall@10 by ~18% over baseline.\n\u2022 Built grounded generation and source attribution mechanisms,",
+        "Header: Shivam Ugale\nAI/ML Engineer with 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning.\nExperienced in building scalable backend systems and deploying production-ready AI solutions.\nshivamugale4533@gmail.com 9607592807 Pune, Maharashtra",
+        "Projects > Resume Screening Assistant | AI/ML, NLP, Semantic Search: for resumes and job descriptions to\nenable semantic matching.\n\u2022 Implemented a FAISS vector database and semantic similarity search to retrieve and rank resumes based on\ncontextual relevance rather than keyword matching.\n\u2022 Developed a candidate matching and scoring mechanism to categorize applicants into Excellent, Good, Fair, and\nWeak Match based on job requirements.\n\u2022 Integrated an LLM-based resume summarization feature to generate concise candidate profiles and accelerate HR\nevaluation.\n\u2022"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9626,
+        "context_precision": 0.5,
+        "context_recall": 1.0,
+        "answer_correctness": 0.8348
+      },
+      "status": "passed"
+    },
+    {
+      "id": "q02",
+      "type": "factual",
+      "question": "How many years of experience does the candidate have, and in which areas?",
+      "ground_truth": "The candidate has 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning.",
+      "reference_contexts": [
+        "AI/ML Engineer with 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning."
+      ],
+      "answer": "The candidate has 2.5 years of experience [4]. This experience is in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning [4].",
+      "contexts": [
+        "Work Experience: Recall@10 by ~18% over baseline.\n\u2022 Built grounded generation and source attribution mechanisms, reducing unsupported responses by ~15% across\nevaluation workloads while improving response traceability.\n\u2022 Productionized GenAI services with FastAPI, implementing asynchronous APIs, background processing, and\nscalable request handling; architected event-driven workloads using Cloud Storage, Pub/Sub, Cloud Run, and\ncontainerized workers, increasing processing throughput by ~60%.\n\u2022 Developed agentic",
+        "Resume overview: The resume has these sections: Skills, Work Experience, Projects, Education. It lists 3 projects: Agentic Healthcare Assistant (Multi-Agent RAG System); RAG-Based Intelligent Document Q&A Chatbot; Resume Screening Assistant | AI/ML, NLP, Semantic Search.",
+        "Work Experience: VectoreX Software Pvt Ltd\nAI/ML Engineer May 2024 - Present\n\u2022 Engineered a production-grade RAG platform on GCP for natural-language retrieval across enterprise knowledge\nsources, improving end-to-end answer accuracy by ~30%.\n\u2022 Designed a hybrid retrieval and reranking pipeline combining dense embeddings, BM25, metadata filtering,\nReciprocal Rank Fusion (RRF), and cross-encoder reranking, improving Recall@10 by ~18% over baseline.\n\u2022 Built grounded generation and source attribution mechanisms,",
+        "Header: Shivam Ugale\nAI/ML Engineer with 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning.\nExperienced in building scalable backend systems and deploying production-ready AI solutions.\nshivamugale4533@gmail.com 9607592807 Pune, Maharashtra"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9072,
+        "context_precision": 0.25,
+        "context_recall": 1.0,
+        "answer_correctness": 0.993
+      },
+      "status": "failed"
+    },
+    {
+      "id": "q03",
+      "type": "factual",
+      "question": "Where is the candidate located?",
+      "ground_truth": "The candidate is located in Pune, Maharashtra.",
+      "reference_contexts": [
+        "shivamugale4533@gmail.com 9607592807 Pune, Maharashtra"
+      ],
+      "answer": "The candidate is located in Pune, Maharashtra [1].",
+      "contexts": [
+        "Header: Shivam Ugale\nAI/ML Engineer with 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning.\nExperienced in building scalable backend systems and deploying production-ready AI solutions.\nshivamugale4533@gmail.com 9607592807 Pune, Maharashtra",
+        "Resume overview: The resume has these sections: Skills, Work Experience, Projects, Education. It lists 3 projects: Agentic Healthcare Assistant (Multi-Agent RAG System); RAG-Based Intelligent Document Q&A Chatbot; Resume Screening Assistant | AI/ML, NLP, Semantic Search.",
+        "Education: Dr. Babasaheb Ambedkar Marathwada University, Chh. Sambhajinagar\nBachelor of Commerce (B.Com) | CGPA: 7.5 / 10 2021 - 2024",
+        "Work Experience: VectoreX Software Pvt Ltd\nAI/ML Engineer May 2024 - Present\n\u2022 Engineered a production-grade RAG platform on GCP for natural-language retrieval across enterprise knowledge\nsources, improving end-to-end answer accuracy by ~30%.\n\u2022 Designed a hybrid retrieval and reranking pipeline combining dense embeddings, BM25, metadata filtering,\nReciprocal Rank Fusion (RRF), and cross-encoder reranking, improving Recall@10 by ~18% over baseline.\n\u2022 Built grounded generation and source attribution mechanisms,"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9939
+      },
+      "status": "passed"
+    },
+    {
+      "id": "q04",
+      "type": "factual",
+      "question": "What is the candidate's educational qualification?",
+      "ground_truth": "The candidate holds a Bachelor of Commerce (B.Com) from Dr. Babasaheb Ambedkar Marathwada University, Chh. Sambhajinagar, completed 2021-2024 with a CGPA of 7.5 out of 10.",
+      "reference_contexts": [
+        "Education: Dr. Babasaheb Ambedkar Marathwada University, Chh. Sambhajinagar\nBachelor of Commerce (B.Com) | CGPA: 7.5 / 10 2021 - 2024"
+      ],
+      "answer": "The candidate holds a Bachelor of Commerce (B.Com) from Dr. Babasaheb Ambedkar Marathwada University, Chh. Sambhajinagar, with a CGPA of 7.5 out of 10, completed between 2021 and 2024 [1].",
+      "contexts": [
+        "Education: Dr. Babasaheb Ambedkar Marathwada University, Chh. Sambhajinagar\nBachelor of Commerce (B.Com) | CGPA: 7.5 / 10 2021 - 2024",
+        "Resume overview: The resume has these sections: Skills, Work Experience, Projects, Education. It lists 3 projects: Agentic Healthcare Assistant (Multi-Agent RAG System); RAG-Based Intelligent Document Q&A Chatbot; Resume Screening Assistant | AI/ML, NLP, Semantic Search.",
+        "Header: Shivam Ugale\nAI/ML Engineer with 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning.\nExperienced in building scalable backend systems and deploying production-ready AI solutions.\nshivamugale4533@gmail.com 9607592807 Pune, Maharashtra",
+        "Work Experience: VectoreX Software Pvt Ltd\nAI/ML Engineer May 2024 - Present\n\u2022 Engineered a production-grade RAG platform on GCP for natural-language retrieval across enterprise knowledge\nsources, improving end-to-end answer accuracy by ~30%.\n\u2022 Designed a hybrid retrieval and reranking pipeline combining dense embeddings, BM25, metadata filtering,\nReciprocal Rank Fusion (RRF), and cross-encoder reranking, improving Recall@10 by ~18% over baseline.\n\u2022 Built grounded generation and source attribution mechanisms,"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8808,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9954
+      },
+      "status": "passed"
+    },
+    {
+      "id": "q05",
+      "type": "list",
+      "question": "Which vector databases does the candidate know?",
+      "ground_truth": "The candidate knows FAISS and ChromaDB.",
+      "reference_contexts": [
+        "Embeddings, Vector Databases (FAISS, ChromaDB), Semantic Search, BM25, Hybrid Retrieval, Reranking"
+      ],
+      "answer": "The candidate knows FAISS and ChromaDB [1].",
+      "contexts": [
+        "Skills: \u2022 Programming & Backend: Python, SQL, NoSQL, FastAPI, REST APIs, Pydantic, Microservices, Asynchronous\nProgramming, Streamlit\n\u2022 AI & LLM Engineering: RAG, Agentic AI, Multi-Agent Systems, LLMs, Generative AI, Transformers, LangChain,\nLangGraph, LlamaIndex, Prompt Engineering, Fine-tuning, OpenAI, Azure OpenAI, Sentence Transformers,\nEmbeddings, Vector Databases (FAISS, ChromaDB), Semantic Search, BM25, Hybrid Retrieval, Reranking, AI\nEvaluation (RAGAS), Guardrails AI, Model Context Protocol",
+        "Skills: BM25, Hybrid Retrieval, Reranking, AI\nEvaluation (RAGAS), Guardrails AI, Model Context Protocol (MCP)\n\u2022 Machine Learning: Supervised Learning, Unsupervised Learning, Feature Engineering, Scikit-learn, XGBoost, NLP,\nMLflow\n\u2022 Deep Learning: PyTorch, TensorFlow, Keras, CNNs, RNNs\n\u2022 Cloud & Deployment: GCP (Cloud Storage, IAM, Cloud Run, Pub/Sub, Compute Engine, Firestore, Vertex AI/Agent\nPlatform), Supabase, Docker, Git, CI/CD",
+        "Work Experience: VectoreX Software Pvt Ltd\nAI/ML Engineer May 2024 - Present\n\u2022 Engineered a production-grade RAG platform on GCP for natural-language retrieval across enterprise knowledge\nsources, improving end-to-end answer accuracy by ~30%.\n\u2022 Designed a hybrid retrieval and reranking pipeline combining dense embeddings, BM25, metadata filtering,\nReciprocal Rank Fusion (RRF), and cross-encoder reranking, improving Recall@10 by ~18% over baseline.\n\u2022 Built grounded generation and source attribution mechanisms,",
+        "Projects > Resume Screening Assistant | AI/ML, NLP, Semantic Search: for resumes and job descriptions to\nenable semantic matching.\n\u2022 Implemented a FAISS vector database and semantic similarity search to retrieve and rank resumes based on\ncontextual relevance rather than keyword matching.\n\u2022 Developed a candidate matching and scoring mechanism to categorize applicants into Excellent, Good, Fair, and\nWeak Match based on job requirements.\n\u2022 Integrated an LLM-based resume summarization feature to generate concise candidate profiles and accelerate HR\nevaluation.\n\u2022"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.986,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9972
+      },
+      "status": "passed"
+    },
+    {
+      "id": "q06",
+      "type": "list",
+      "question": "Which deep learning frameworks are listed in the candidate's skills?",
+      "ground_truth": "The candidate lists PyTorch, TensorFlow, and Keras, along with CNNs and RNNs.",
+      "reference_contexts": [
+        "Deep Learning: PyTorch, TensorFlow, Keras, CNNs, RNNs"
+      ],
+      "answer": "The deep learning frameworks listed in the candidate's skills are PyTorch, TensorFlow, and Keras [1].",
+      "contexts": [
+        "Skills: BM25, Hybrid Retrieval, Reranking, AI\nEvaluation (RAGAS), Guardrails AI, Model Context Protocol (MCP)\n\u2022 Machine Learning: Supervised Learning, Unsupervised Learning, Feature Engineering, Scikit-learn, XGBoost, NLP,\nMLflow\n\u2022 Deep Learning: PyTorch, TensorFlow, Keras, CNNs, RNNs\n\u2022 Cloud & Deployment: GCP (Cloud Storage, IAM, Cloud Run, Pub/Sub, Compute Engine, Firestore, Vertex AI/Agent\nPlatform), Supabase, Docker, Git, CI/CD",
+        "Skills: \u2022 Programming & Backend: Python, SQL, NoSQL, FastAPI, REST APIs, Pydantic, Microservices, Asynchronous\nProgramming, Streamlit\n\u2022 AI & LLM Engineering: RAG, Agentic AI, Multi-Agent Systems, LLMs, Generative AI, Transformers, LangChain,\nLangGraph, LlamaIndex, Prompt Engineering, Fine-tuning, OpenAI, Azure OpenAI, Sentence Transformers,\nEmbeddings, Vector Databases (FAISS, ChromaDB), Semantic Search, BM25, Hybrid Retrieval, Reranking, AI\nEvaluation (RAGAS), Guardrails AI, Model Context Protocol",
+        "Resume overview: The resume has these sections: Skills, Work Experience, Projects, Education. It lists 3 projects: Agentic Healthcare Assistant (Multi-Agent RAG System); RAG-Based Intelligent Document Q&A Chatbot; Resume Screening Assistant | AI/ML, NLP, Semantic Search.",
+        "Header: Shivam Ugale\nAI/ML Engineer with 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning.\nExperienced in building scalable backend systems and deploying production-ready AI solutions.\nshivamugale4533@gmail.com 9607592807 Pune, Maharashtra"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.999,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.7709
+      },
+      "status": "passed"
+    },
+    {
+      "id": "q07",
+      "type": "list",
+      "question": "Which Google Cloud (GCP) services has the candidate worked with?",
+      "ground_truth": "The candidate has worked with GCP Cloud Storage, IAM, Cloud Run, Pub/Sub, Compute Engine, Firestore, and Vertex AI/Agent Platform.",
+      "reference_contexts": [
+        "Cloud & Deployment: GCP (Cloud Storage, IAM, Cloud Run, Pub/Sub, Compute Engine, Firestore, Vertex AI/Agent Platform), Supabase, Docker, Git, CI/CD"
+      ],
+      "answer": "The candidate has worked with the following Google Cloud (GCP) services:\n* Cloud Storage [1, 3]\n* IAM [1]\n* Cloud Run [1, 2, 3]\n* Pub/Sub [1, 3]\n* Compute Engine [1]\n* Firestore [1]\n* Vertex AI/Agent Platform [1]",
+      "contexts": [
+        "Skills: BM25, Hybrid Retrieval, Reranking, AI\nEvaluation (RAGAS), Guardrails AI, Model Context Protocol (MCP)\n\u2022 Machine Learning: Supervised Learning, Unsupervised Learning, Feature Engineering, Scikit-learn, XGBoost, NLP,\nMLflow\n\u2022 Deep Learning: PyTorch, TensorFlow, Keras, CNNs, RNNs\n\u2022 Cloud & Deployment: GCP (Cloud Storage, IAM, Cloud Run, Pub/Sub, Compute Engine, Firestore, Vertex AI/Agent\nPlatform), Supabase, Docker, Git, CI/CD",
+        "Work Experience: Cloud Run, and\ncontainerized workers, increasing processing throughput by ~60%.\n\u2022 Developed agentic AI workflows integrating LLM reasoning, tool calling, workflow orchestration, and structured\noutputs to automate complex multi-step enterprise tasks.\n\u2022 Optimized LLM inference and retrieval infrastructure through multi-provider model support, context optimization,\nand configurable retrieval strategies, reducing p95 latency by ~30%.",
+        "Work Experience: Recall@10 by ~18% over baseline.\n\u2022 Built grounded generation and source attribution mechanisms, reducing unsupported responses by ~15% across\nevaluation workloads while improving response traceability.\n\u2022 Productionized GenAI services with FastAPI, implementing asynchronous APIs, background processing, and\nscalable request handling; architected event-driven workloads using Cloud Storage, Pub/Sub, Cloud Run, and\ncontainerized workers, increasing processing throughput by ~60%.\n\u2022 Developed agentic",
+        "Skills: \u2022 Programming & Backend: Python, SQL, NoSQL, FastAPI, REST APIs, Pydantic, Microservices, Asynchronous\nProgramming, Streamlit\n\u2022 AI & LLM Engineering: RAG, Agentic AI, Multi-Agent Systems, LLMs, Generative AI, Transformers, LangChain,\nLangGraph, LlamaIndex, Prompt Engineering, Fine-tuning, OpenAI, Azure OpenAI, Sentence Transformers,\nEmbeddings, Vector Databases (FAISS, ChromaDB), Semantic Search, BM25, Hybrid Retrieval, Reranking, AI\nEvaluation (RAGAS), Guardrails AI, Model Context Protocol"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9895
+      },
+      "status": "passed"
+    },
+    {
+      "id": "q08",
+      "type": "list",
+      "question": "What projects are listed on the resume?",
+      "ground_truth": "The resume lists three projects: Agentic Healthcare Assistant (Multi-Agent RAG System), RAG-Based Intelligent Document Q&A Chatbot, and Resume Screening Assistant.",
+      "reference_contexts": [
+        "Projects > Agentic Healthcare Assistant (Multi-Agent RAG System)",
+        "Projects > RAG-Based Intelligent Document Q&A Chatbot",
+        "Projects > Resume Screening Assistant | AI/ML, NLP, Semantic Search"
+      ],
+      "answer": "The resume lists the following three projects [1]:\n* Agentic Healthcare Assistant (Multi-Agent RAG System) [1]\n* RAG-Based Intelligent Document Q&A Chatbot [1]\n* Resume Screening Assistant | AI/ML, NLP, Semantic Search [1]",
+      "contexts": [
+        "Resume overview: The resume has these sections: Skills, Work Experience, Projects, Education. It lists 3 projects: Agentic Healthcare Assistant (Multi-Agent RAG System); RAG-Based Intelligent Document Q&A Chatbot; Resume Screening Assistant | AI/ML, NLP, Semantic Search.",
+        "Projects > Resume Screening Assistant | AI/ML, NLP, Semantic Search: for resumes and job descriptions to\nenable semantic matching.\n\u2022 Implemented a FAISS vector database and semantic similarity search to retrieve and rank resumes based on\ncontextual relevance rather than keyword matching.\n\u2022 Developed a candidate matching and scoring mechanism to categorize applicants into Excellent, Good, Fair, and\nWeak Match based on job requirements.\n\u2022 Integrated an LLM-based resume summarization feature to generate concise candidate profiles and accelerate HR\nevaluation.\n\u2022",
+        "Projects > Resume Screening Assistant | AI/ML, NLP, Semantic Search: Python, Sentence Transformers (all-MiniLM-L6-v2), FAISS, LLM, NLP\n\u2022 Developed an AI-powered Resume Screening Assistant to automate candidate screening and reduce manual HR\neffort for high-volume recruitment.\n\u2022 Built a PDF resume processing pipeline to extract and preprocess candidate information from up to 100 resumes\nper job opening.\n\u2022 Generated text embeddings using Sentence Transformers (all-MiniLM-L6-v2) for resumes and job descriptions to\nenable semantic matching.\n\u2022 Implemented a FAISS",
+        "Projects > Agentic Healthcare Assistant (Multi-Agent RAG System): Generation (RAG) using ChromaDB and embeddings to answer healthcare\nquestions from medical documents.\n\u2022 Developed REST APIs with FastAPI and structured output validation using Pydantic; integrated OpenAI LLMs for\ndiagnosis support, treatment suggestions, and conversational responses.\n\u2022 Built a Streamlit interface for symptom input, medical Q&A, and report visualization; implemented conversation\nmemory and generated downloadable patient reports in PDF and JSON formats.\n\u2022 Containerized and"
+      ],
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9247,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9918
+      },
+      "status": "passed"
+    }
+  ],
+  "dataset": "resume-qa-v1",
+  "case_count": 8,
+  "settings": {
+    "chat_model": "gemini-3.5-flash-lite",
+    "embedding_model": "gemini-embedding-001",
+    "judge_model": "gemini-3.1-flash-lite",
+    "top_k": 4,
+    "max_chunks_per_section": 2,
+    "chunk_size": 500,
+    "chunk_overlap": 100
+  },
+  "failed_count": 1,
+  "error": "Partial run: stopped after 8 of 18 cases because the judge model's daily free-tier quota (500 requests) was exhausted. Cases q01-q08 are fully scored.",
+  "completed_at": "2026-10-18T13:36:59.584524+00:00"
+}
