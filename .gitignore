@@ -1,0 +1,27 @@
+# ---- Secrets (NEVER commit) ----
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ---- Python ----
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/data/
+backend/eval/.cache/
+
+# ---- Node / Vite ----
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# ---- Editors / OS ----
+.DS_Store
+.vercel/
+.idea/
+
+# ---- Local leftovers ----
+*.zip
