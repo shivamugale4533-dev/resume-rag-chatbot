@@ -135,10 +135,37 @@ def split_long_text(text: str) -> list[str]:
     return pieces    
 
 
+def make_overview(sections: list[dict]) -> str | None:
+    """One extra chunk that LISTS the resume's sections and project names.
+
+    Why: a question like "What projects are listed?" needs ALL projects, but top-k
+    search returns only the 4 closest chunks, often several from ONE project
+    (found with the RAGAS benchmark). This summary chunk answers such questions alone.
+    """
+    names = []                                  # section names in order, without duplicates
+    for s in sections:
+        main_name = s["section"].split(" > ")[0]
+        if main_name != "Header" and main_name not in names:
+            names.append(main_name)
+    projects = []
+    for s in sections:
+        if s["section"].startswith("Projects > "):
+            title = s["section"][len("Projects > "):]
+            if title not in projects:
+                projects.append(title)
+    if not names:
+        return None
+    text = "Resume overview: The resume has these sections: " + ", ".join(names) + "."
+    if projects:
+        text += f" It lists {len(projects)} projects: " + "; ".join(projects) + "."
+    return text
+
+
 def make_chunks(pages: list[dict]) -> list[dict]:
     """Full chunking pipeline: pages → sections → chunks with IDs."""
     chunks = []
-    for section in split_into_sections(pages):
+    sections = split_into_sections(pages)
+    for section in sections:
         for piece in split_long_text(section["text"]):
             chunks.append({
                 "chunk_id": f"c{len(chunks) + 1}",   # c1, c2, c3 ...
@@ -148,4 +175,13 @@ def make_chunks(pages: list[dict]) -> list[dict]:
                 # "Python, SQL, React" still carries the meaning "these are Skills".
                 "text": f"{section['section']}: {piece}",
             })
+    # Add the overview chunk at the end (its own section, so it is easy to cite).
+    overview = make_overview(sections)
+    if overview:
+        chunks.append({
+            "chunk_id": f"c{len(chunks) + 1}",
+            "section": "Overview",
+            "page": sections[0]["page"],
+            "text": overview,
+        })
     return chunks

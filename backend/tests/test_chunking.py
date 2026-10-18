@@ -19,23 +19,23 @@ def test_sections_and_section_prefix():
     pages = [{"page": 1, "text": "Jane Doe\nSKILLS\nPython, SQL\nEDUCATION\nBSc Physics"}]
     chunks = make_chunks(pages)
     sections = [c["section"] for c in chunks]
-    assert sections == ["Header", "Skills", "Education"]
+    assert sections == ["Header", "Skills", "Education", "Overview"]
     # The section name is put in front of the text, so "Python, SQL" keeps its meaning.
     assert chunks[1]["text"] == "Skills: Python, SQL"
-    assert [c["chunk_id"] for c in chunks] == ["c1", "c2", "c3"]
+    assert [c["chunk_id"] for c in chunks] == ["c1", "c2", "c3", "c4"]
 
 
 def test_each_project_gets_its_own_chunk():
     text = "PROJECTS\nResume Chatbot\nBuilt a RAG chatbot.\nSales Dashboard\nBuilt a dashboard."
     sections = [c["section"] for c in make_chunks([{"page": 1, "text": text}])]
-    assert sections == ["Projects > Resume Chatbot", "Projects > Sales Dashboard"]
+    assert sections[:2] == ["Projects > Resume Chatbot", "Projects > Sales Dashboard"]
 
 
 def test_lonely_bullets_and_extra_spaces_are_cleaned():
     text = "SKILLS\n•\nPython      and    SQL\n   \n•"
     chunks = make_chunks([{"page": 1, "text": text}])
-    assert len(chunks) == 1
     assert chunks[0]["text"] == "Skills: Python and SQL"
+    assert [c["section"] for c in chunks] == ["Skills", "Overview"]
 
 
 def test_page_numbers_follow_the_text():
@@ -45,7 +45,7 @@ def test_page_numbers_follow_the_text():
     ]
     chunks = make_chunks(pages)
     # Experience continues on page 2, so it is split with the correct page for each part.
-    assert [(c["section"], c["page"]) for c in chunks] == [
+    assert [(c["section"], c["page"]) for c in chunks[:-1]] == [
         ("Experience", 1), ("Experience", 2), ("Education", 2),
     ]
 
@@ -66,3 +66,13 @@ def test_long_text_is_split_with_overlap_and_no_broken_words():
 
 def test_short_text_is_one_piece():
     assert split_long_text("short text") == ["short text"]
+
+
+def test_overview_chunk_lists_sections_and_all_projects():
+    text = "SKILLS\nPython\nPROJECTS\nResume Chatbot\nBuilt a RAG chatbot.\nSales Dashboard\nBuilt a dashboard."
+    overview = make_chunks([{"page": 1, "text": text}])[-1]
+    assert overview["section"] == "Overview"
+    assert overview["text"] == (
+        "Resume overview: The resume has these sections: Skills, Projects. "
+        "It lists 2 projects: Resume Chatbot; Sales Dashboard."
+    )
