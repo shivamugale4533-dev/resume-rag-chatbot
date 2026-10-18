@@ -1,0 +1,143 @@
+{
+  "name": "resume-qa-v1",
+  "description": "Test questions about Shivam_Ugale_AI_ML_Engineer_Resume.pdf. Each case has a question, the expected answer (ground truth) and the resume text that contains it (reference contexts).",
+  "cases": [
+    {
+      "id": "q01",
+      "type": "factual",
+      "question": "What is the candidate's current job title and company?",
+      "ground_truth": "The candidate has worked as an AI/ML Engineer at VectoreX Software Pvt Ltd since May 2024.",
+      "reference_contexts": ["Work Experience: VectoreX Software Pvt Ltd\nAI/ML Engineer May 2024 - Present"]
+    },
+    {
+      "id": "q02",
+      "type": "factual",
+      "question": "How many years of experience does the candidate have, and in which areas?",
+      "ground_truth": "The candidate has 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning.",
+      "reference_contexts": ["AI/ML Engineer with 2.5 years of experience in Generative AI, LLMs, RAG, Agentic AI, and Machine Learning."]
+    },
+    {
+      "id": "q03",
+      "type": "factual",
+      "question": "Where is the candidate located?",
+      "ground_truth": "The candidate is located in Pune, Maharashtra.",
+      "reference_contexts": ["shivamugale4533@gmail.com 9607592807 Pune, Maharashtra"]
+    },
+    {
+      "id": "q04",
+      "type": "factual",
+      "question": "What is the candidate's educational qualification?",
+      "ground_truth": "The candidate holds a Bachelor of Commerce (B.Com) from Dr. Babasaheb Ambedkar Marathwada University, Chh. Sambhajinagar, completed 2021-2024 with a CGPA of 7.5 out of 10.",
+      "reference_contexts": ["Education: Dr. Babasaheb Ambedkar Marathwada University, Chh. Sambhajinagar\nBachelor of Commerce (B.Com) | CGPA: 7.5 / 10 2021 - 2024"]
+    },
+    {
+      "id": "q05",
+      "type": "list",
+      "question": "Which vector databases does the candidate know?",
+      "ground_truth": "The candidate knows FAISS and ChromaDB.",
+      "reference_contexts": ["Embeddings, Vector Databases (FAISS, ChromaDB), Semantic Search, BM25, Hybrid Retrieval, Reranking"]
+    },
+    {
+      "id": "q06",
+      "type": "list",
+      "question": "Which deep learning frameworks are listed in the candidate's skills?",
+      "ground_truth": "The candidate lists PyTorch, TensorFlow, and Keras, along with CNNs and RNNs.",
+      "reference_contexts": ["Deep Learning: PyTorch, TensorFlow, Keras, CNNs, RNNs"]
+    },
+    {
+      "id": "q07",
+      "type": "list",
+      "question": "Which Google Cloud (GCP) services has the candidate worked with?",
+      "ground_truth": "The candidate has worked with GCP Cloud Storage, IAM, Cloud Run, Pub/Sub, Compute Engine, Firestore, and Vertex AI/Agent Platform.",
+      "reference_contexts": ["Cloud & Deployment: GCP (Cloud Storage, IAM, Cloud Run, Pub/Sub, Compute Engine, Firestore, Vertex AI/Agent Platform), Supabase, Docker, Git, CI/CD"]
+    },
+    {
+      "id": "q08",
+      "type": "list",
+      "question": "What projects are listed on the resume?",
+      "ground_truth": "The resume lists three projects: Agentic Healthcare Assistant (Multi-Agent RAG System), RAG-Based Intelligent Document Q&A Chatbot, and Resume Screening Assistant.",
+      "reference_contexts": [
+        "Projects > Agentic Healthcare Assistant (Multi-Agent RAG System)",
+        "Projects > RAG-Based Intelligent Document Q&A Chatbot",
+        "Projects > Resume Screening Assistant | AI/ML, NLP, Semantic Search"
+      ]
+    },
+    {
+      "id": "q09",
+      "type": "list",
+      "question": "Which agents are part of the Agentic Healthcare Assistant?",
+      "ground_truth": "The multi-agent workflow includes Supervisor, Symptom Analysis, Disease Prediction, Medication Recommendation, RAG, Appointment Booking, and Report Generation agents.",
+      "reference_contexts": ["Built a multi-agent workflow with Supervisor, Symptom Analysis, Disease Prediction, Medication Recommendation, RAG, Appointment Booking, and Report Generation agents."]
+    },
+    {
+      "id": "q10",
+      "type": "factual",
+      "question": "How did the candidate improve Recall@10 at VectoreX, and by how much?",
+      "ground_truth": "The candidate designed a hybrid retrieval and reranking pipeline combining dense embeddings, BM25, metadata filtering, Reciprocal Rank Fusion (RRF), and cross-encoder reranking, which improved Recall@10 by about 18% over the baseline.",
+      "reference_contexts": ["Designed a hybrid retrieval and reranking pipeline combining dense embeddings, BM25, metadata filtering, Reciprocal Rank Fusion (RRF), and cross-encoder reranking, improving Recall@10 by ~18% over baseline."]
+    },
+    {
+      "id": "q11",
+      "type": "multi-section",
+      "question": "Which of the candidate's projects used Docker?",
+      "ground_truth": "Docker was used in the Agentic Healthcare Assistant, which was containerized and deployed with Docker, and in the RAG-Based Intelligent Document Q&A Chatbot, which was deployed as a containerized Streamlit application using Docker.",
+      "reference_contexts": [
+        "Projects > Agentic Healthcare Assistant (Multi-Agent RAG System): Python, FastAPI, LangChain, LangGraph, ChromaDB, OpenAI, Pydantic, Streamlit, Docker",
+        "Containerized and deployed the application using Docker.",
+        "Deployed a containerized Streamlit application using Docker, serving 50+ concurrent users with real-time document upload"
+      ]
+    },
+    {
+      "id": "q12",
+      "type": "multi-section",
+      "question": "Where has the candidate used FastAPI, both at work and in projects?",
+      "ground_truth": "At VectoreX, the candidate productionized GenAI services with FastAPI using asynchronous APIs, background processing, and scalable request handling. In the Agentic Healthcare Assistant project, the candidate developed REST APIs with FastAPI.",
+      "reference_contexts": [
+        "Productionized GenAI services with FastAPI, implementing asynchronous APIs, background processing, and scalable request handling",
+        "Developed REST APIs with FastAPI and structured output validation using Pydantic"
+      ]
+    },
+    {
+      "id": "q13",
+      "type": "follow-up (standalone)",
+      "question": "What RAGAS result did the candidate achieve in the Document Q&A Chatbot project?",
+      "ground_truth": "The Document Q&A Chatbot was evaluated with RAGAS and achieved 95% answer relevance scores across 500+ test queries.",
+      "reference_contexts": ["Integrated Azure OpenAI with a Top-K = 3 RAG pipeline augmented by cross-encoder reranking, evaluated via RAGAS achieving 95% answer relevance scores across 500+ test queries."]
+    },
+    {
+      "id": "q14",
+      "type": "follow-up (standalone)",
+      "question": "Which embedding model was used in the Resume Screening Assistant?",
+      "ground_truth": "The Resume Screening Assistant used the Sentence Transformers model all-MiniLM-L6-v2 to embed resumes and job descriptions.",
+      "reference_contexts": ["Generated text embeddings using Sentence Transformers (all-MiniLM-L6-v2) for resumes and job descriptions to enable semantic matching."]
+    },
+    {
+      "id": "q15",
+      "type": "follow-up (standalone)",
+      "question": "How did the candidate reduce p95 latency at VectoreX, and by how much?",
+      "ground_truth": "The candidate optimized LLM inference and retrieval infrastructure through multi-provider model support, context optimization, and configurable retrieval strategies, reducing p95 latency by about 30%.",
+      "reference_contexts": ["Optimized LLM inference and retrieval infrastructure through multi-provider model support, context optimization, and configurable retrieval strategies, reducing p95 latency by ~30%."]
+    },
+    {
+      "id": "q16",
+      "type": "factual",
+      "question": "Into which categories does the Resume Screening Assistant classify applicants?",
+      "ground_truth": "Applicants are categorized as Excellent, Good, Fair, or Weak Match based on job requirements.",
+      "reference_contexts": ["Developed a candidate matching and scoring mechanism to categorize applicants into Excellent, Good, Fair, and Weak Match based on job requirements."]
+    },
+    {
+      "id": "q17",
+      "type": "not in resume",
+      "question": "What is the candidate's expected salary?",
+      "ground_truth": "I couldn't find that information in the resume.",
+      "reference_contexts": []
+    },
+    {
+      "id": "q18",
+      "type": "not in resume",
+      "question": "Does the candidate hold an AWS certification?",
+      "ground_truth": "I couldn't find that information in the resume.",
+      "reference_contexts": []
+    }
+  ]
+}
