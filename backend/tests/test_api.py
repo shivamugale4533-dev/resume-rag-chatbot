@@ -191,3 +191,12 @@ def test_unexpected_crash_returns_clean_500(client, monkeypatch):
     assert response.status_code == 500
     assert response.json() == {"detail": "Internal server error. Please try again."}
     assert client.get("/logs?level=error").json()["items"][0]["event"] == "error.unhandled"
+
+
+def test_search_limits_chunks_per_section(uploaded):
+    # Diversity rule: with max_per_section=1, every retrieved chunk comes from a different section.
+    from tests.conftest import fake_vector
+    hits = vector_store.search(main.current_resume["id"], fake_vector("projects built"), k=4, max_per_section=1)
+    sections = [h["section"] for h in hits]
+    assert len(sections) == len(set(sections))
+    assert [h["index"] for h in hits] == list(range(1, len(hits) + 1))   # citations stay 1, 2, 3...

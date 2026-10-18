@@ -289,13 +289,15 @@ def retrieve(question: str, history: list[dict], session_id: str | None = None) 
     # R: Retrieve — find the chunks closest in meaning to the question
     start = time.perf_counter()
     query_embedding = embed_query(search_question)
-    hits = vector_store.search(current_resume["id"], query_embedding, config.TOP_K)
+    hits = vector_store.search(current_resume["id"], query_embedding, config.TOP_K,
+                              max_per_section=config.MAX_CHUNKS_PER_SECTION or None)
     log_event("retrieval.executed", f"Retrieved {len(hits)} chunks for '{search_question}'",
               conversation_id=session_id, document_id=current_resume["id"], duration_ms=ms_since(start),
               details={
                   "original_question": question,
                   "search_question": search_question,
                   "top_k": config.TOP_K,
+                  "max_per_section": config.MAX_CHUNKS_PER_SECTION,
                   "chunk_ids": [h["chunk_id"] for h in hits],
                   "sections": [h["section"] for h in hits],
                   "scores": [h["score"] for h in hits],

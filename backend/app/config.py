@@ -25,6 +25,8 @@ CHROMA_DIR = os.getenv("CHROMA_DIR", "data/chroma")
 ACTIVE_RESUME_FILE = os.getenv("ACTIVE_RESUME_FILE", "data/active_resume.json")
     # How many chunks to retrieve for each question.
 TOP_K = int(os.getenv("TOP_K", "4"))
+# Diversity: at most this many retrieved chunks from the same section (0 = no limit).
+MAX_CHUNKS_PER_SECTION = int(os.getenv("MAX_CHUNKS_PER_SECTION", "2"))
 
 # ---------------- Class 6: LLM (answer generation) ----------------
 # Which Gemini model writes the answers. "Flash" models are fast and on the free tier.

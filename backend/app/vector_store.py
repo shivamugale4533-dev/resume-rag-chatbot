@@ -40,19 +40,40 @@ def delete_resume(resume_id: str) -> None:
         pass   # already gone: nothing to do
 
 
-def search(resume_id: str, query_embedding: list[float], k: int) -> list[dict]:
-    """Return the k chunks whose meaning is closest to the question."""
+def search(resume_id: str, query_embedding: list[float], k: int,
+           max_per_section: int | None = None) -> list[dict]:
+    """Return the k chunks whose meaning is closest to the question.
+
+    max_per_section = DIVERSITY rule: at most N chunks from the same section.
+    Without it, "What projects are listed?" returned 3 chunks of ONE project,
+    so the other projects were missing (found with the RAGAS benchmark).
+    """
     collection = _client.get_collection(collection_name(resume_id), embedding_function=None)
+    # Ask for extra candidates (3 × k), so we still have k after the diversity rule.
+    fetch = k * 3 if max_per_section else k
     result = collection.query(
         query_embeddings=[query_embedding],
-        n_results=min(k, collection.count()),   # can't ask for more chunks than exist
+        n_results=min(fetch, collection.count()),   # can't ask for more chunks than exist
         include=["documents", "metadatas", "distances"],
     )
-    hits = []
     # Chroma returns lists inside lists (one inner list per question); we sent one question → [0]
-    for rank, (chunk_id, text, meta, distance) in enumerate(zip(
+    candidates = list(zip(
         result["ids"][0], result["documents"][0], result["metadatas"][0], result["distances"][0]
-    ), start=1):
+    ))
+
+    # Keep the best chunks, skipping a section once it already has max_per_section chunks.
+    chosen, per_section = [], {}
+    for candidate in candidates:
+        section = candidate[2].get("section")
+        if max_per_section and per_section.get(section, 0) >= max_per_section:
+            continue
+        per_section[section] = per_section.get(section, 0) + 1
+        chosen.append(candidate)
+        if len(chosen) == k:
+            break
+
+    hits = []
+    for rank, (chunk_id, text, meta, distance) in enumerate(chosen, start=1):
         hits.append({
             "index": rank,                              # 1, 2, 3 ... → citation number [1], [2]
             "chunk_id": chunk_id,
@@ -63,6 +84,7 @@ def search(resume_id: str, query_embedding: list[float], k: int) -> list[dict]:
             "score": round(1 - distance, 4),
         })
     return hits
+
 
 def has_resume(resume_id: str) -> bool:
     """True if this resume's collection exists on disk (checked after a restart)."""

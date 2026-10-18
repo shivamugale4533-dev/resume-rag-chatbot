@@ -117,6 +117,7 @@ def run_evaluation(run: dict, rag_pipeline, on_update=lambda run: None, limit: i
     run.update(status="running", dataset=dataset["name"], case_count=len(cases),
                settings={"chat_model": config.CHAT_MODEL, "embedding_model": config.EMBEDDING_MODEL,
                          "judge_model": config.EVAL_LLM_MODEL, "top_k": config.TOP_K,
+                         "max_chunks_per_section": config.MAX_CHUNKS_PER_SECTION,
                          "chunk_size": 500, "chunk_overlap": 100})
     on_update(run)
 
