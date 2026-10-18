@@ -25,3 +25,6 @@ dist/
 
 # ---- Local leftovers ----
 *.zip
+
+# Old local copy, not part of the app
+backend/app/chunking_backup.py
