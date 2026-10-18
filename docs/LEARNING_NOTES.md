@@ -31,10 +31,12 @@ Each section has: **what it is → what it does here → why we chose it → alt
 | Extraction | `extract.py` | PyMuPDF reads PDF text page by page (keeps page numbers for citations). python-docx reads DOCX paragraphs **and tables**. |
 | Chunking | `chunking.py` | Detects headings (Skills, Projects…), makes one part per project, removes lonely bullets, splits long text into 500-char pieces with 100-char **overlap**, and puts the section name in front of each chunk ("Skills: Python, SQL"). |
 | Embeddings | `embeddings.py` | Gemini `gemini-embedding-001`, 768 dimensions. Uses `RETRIEVAL_DOCUMENT` for chunks and `RETRIEVAL_QUERY` for questions. All chunks go in ONE batch request. |
-| Vector store | `vector_store.py` | ChromaDB on disk, one **collection per resume**, cosine distance. |
+| Vector store | `vector_store.py` | ChromaDB on disk, one **collection per resume**, cosine distance. Search keeps at most 2 chunks per section (diversity). |
 | Generation | `rag.py` | System prompt with strict rules: only use excerpts, say "I couldn't find that information" if missing, cite [n], treat excerpts as data (prompt-injection defence). Temperature 0.2. |
 
 **Why section-aware chunking?** A fixed-size splitter could cut "Skills" away from "Python, SQL". Then the chunk "Python, SQL" has no meaning on its own. Adding the section name keeps the meaning, so retrieval is more accurate.
+
+**Why an overview chunk?** Top-k search only returns the 4 closest chunks. A question like "What projects are listed?" needs ALL projects, which are spread over many chunks. One extra chunk that lists every section and project name answers it directly. (Found with RAGAS — see section 5.)
 
 **Why overlap?** If a sentence is cut at a chunk border, the overlap puts it in both chunks, so it is never lost.
 
@@ -91,7 +93,7 @@ Each section has: **what it is → what it does here → why we chose it → alt
 
 **What:** automatic checks that the code works. Run with `pytest`.
 
-**How:** 41 tests in `backend/tests/`:
+**How:** 43 tests in `backend/tests/`:
 - **Unit tests** (`test_chunking.py`): test one function alone — headings, project titles, lonely bullets, overlap, page numbers.
 - **API tests** (`test_api.py`, `test_logs.py`, `test_evaluations.py`): call the endpoints like the frontend does, using FastAPI's `TestClient`.
 - **Mocking:** we replace the real Gemini client with a **fake** one. The fake makes simple word-count embeddings and fixed answers. So tests are **fast** (< 1 s), **free**, **repeatable**, and need **no API key** (important for CI).
@@ -130,6 +132,28 @@ Each section has: **what it is → what it does here → why we chose it → alt
 - *Context Precision:* the judge marks each retrieved chunk useful/not useful (using the expected answer); useful chunks at higher ranks score more.
 - *Context Recall:* the judge splits the expected answer into statements and checks how many can be found in the retrieved chunks.
 - *Answer Correctness:* 75% factual overlap with the expected answer (true/false positives and negatives) + 25% semantic similarity.
+
+### Our results (learn these numbers)
+
+| Metric | Run 1 (baseline) | Run 2 (section diversity) | Run 3 (overview chunk, 8 cases) |
+|---|---|---|---|
+| Faithfulness | 1.00 | 1.00 | 1.00 |
+| Answer Relevancy | 0.83 | 0.85 | 0.96 |
+| Context Precision | 0.74 | 0.75 | 0.84 |
+| Context Recall | 0.92 | 0.92 | 1.00 |
+| Answer Correctness | 0.88 | 0.89 | 0.95 |
+
+**The story to tell (very good for interviews):**
+1. Baseline run → faithfulness 1.0 (no hallucination), but *"What projects are listed?"* failed: recall 0. Top-4 search returned 3 chunks of ONE project.
+2. Fix 1 — **section diversity**: max 2 chunks per section. Small gain, but q08 still failed.
+3. Fix 2 — **overview chunk**: at indexing time we add one chunk that lists all sections and project names. q08 recall 0 → 1.0, correctness 0.42 → 0.99.
+4. Lesson: *"Measure, find the failing case, fix the cause, measure again."* The weakness was retrieval, not the LLM.
+
+**Why answer relevancy is 0 for "salary" / "AWS" questions:** the bot correctly says "I couldn't find that". RAGAS treats a refusal as a non-committal answer and gives 0 by design. Answer correctness for those cases is 1.0.
+
+**Why run 3 has only 8 cases:** the judge model's free daily quota (500 requests) ran out. So we compare all runs on the same 8 cases. Being honest about this is better than hiding it.
+
+**Why we use lite models:** the free tier for `gemini-3.8-flash` allowed only 20 requests/day. Model names are in `.env`, so switching to `gemini-3.5-flash-lite` (chat) and `gemini-3.1-flash-lite` (judge) needed no code change. Using a different judge model also means the system does not grade itself with the same model.
 
 **Why RAGAS?** It is the most common open-source RAG evaluation tool and covers both retrieval and generation.
 **Alternatives:** DeepEval, TruLens, LangSmith evaluations, Arize Phoenix, manual human review.
@@ -280,4 +304,14 @@ Add login (OAuth with Google/GitHub, or a service like Auth0/Clerk/Supabase Auth
 
 ## 12. 60-second project pitch (practice this)
 
-"I built a resume chatbot using Retrieval-Augmented Generation. The React frontend lets a user upload a resume and chat about it. The FastAPI backend extracts the text, splits it into section-aware chunks, embeds them with Gemini and stores them in ChromaDB. For each question, it rewrites follow-ups into standalone questions using session memory, retrieves the top 4 chunks, and asks Gemini to answer only from those chunks with citations. Every request, retrieval and error is logged and visible in the UI. I benchmarked it with RAGAS on 18 test questions for faithfulness, answer relevancy, context precision, context recall and answer correctness. It has 41 backend tests with a mocked LLM, Docker images, a GitHub Actions pipeline, and it is deployed on Render and Vercel."
+"I built a resume chatbot using Retrieval-Augmented Generation. The React frontend lets a user upload a resume and chat about it. The FastAPI backend extracts the text, splits it into section-aware chunks, embeds them with Gemini and stores them in ChromaDB. For each question, it rewrites follow-ups into standalone questions using session memory, retrieves the top 4 chunks, and asks Gemini to answer only from those chunks with citations. Every request, retrieval and error is logged and visible in the UI. I benchmarked it with RAGAS on 18 test questions for faithfulness, answer relevancy, context precision, context recall and answer correctness. It has 43 backend tests with a mocked LLM, Docker images, a GitHub Actions pipeline, and it is deployed on Render and Vercel."
+
+---
+
+## 13. Extra interview questions about this project
+
+- *Is ChromaDB deployed separately?* — "No. ChromaDB is an embedded vector database. It runs inside the FastAPI container and saves to disk. For production I would use a managed vector DB (Qdrant Cloud, Pinecone, pgvector) because the free Render disk is temporary."
+- *What was the hardest bug?* — "List questions like 'What projects are listed?'. Similarity search returned several chunks of one project. RAGAS showed context recall 0. I added section diversity and an overview chunk; recall went to 1.0."
+- *Why not LangChain?* — "The pipeline is small. Plain Python makes every step visible and easy to debug. LangChain would add many dependencies without adding value here. I have used LangChain/LangGraph in other projects."
+- *What happens when Gemini's quota runs out?* — "The call is retried with backoff; then the API returns a clear 503 message and logs `llm.failed`. Model names are configurable, so I can switch models without code changes."
+- *What would you do next?* — "Hybrid search with BM25 and reranking for multi-section questions, streaming answers, Redis memory, authentication, and a persistent vector database."
