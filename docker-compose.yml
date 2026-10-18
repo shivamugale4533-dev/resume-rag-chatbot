@@ -1,0 +1,33 @@
+# Run the whole app with ONE command:   docker compose up --build
+#   Frontend → http://localhost:8080
+#   Backend  → http://localhost:8000  (API docs at /docs)
+# Before the first run:  cp backend/.env.example backend/.env  and add your GEMINI_API_KEY.
+
+services:
+  backend:
+    build: ./backend
+    env_file: backend/.env                       # API key and settings (never baked into the image)
+    environment:
+      # Allow the Dockerized frontend (port 8080) and the Vite dev server (5173).
+      FRONTEND_ORIGINS: http://localhost:8080,http://localhost:5173
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_data:/app/data                   # ChromaDB + active resume survive container restarts
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # The BROWSER calls the API, so this is the address as seen from your computer.
+        VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy               # wait until the backend /health check passes
+    restart: unless-stopped
+
+volumes:
+  backend_data:
